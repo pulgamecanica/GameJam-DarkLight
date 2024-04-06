@@ -92,17 +92,13 @@ namespace UnityStandardAssets._2D
                     Flip();
                 }
             }
-            // If the player should jump...
-            if (jump && (jumps_left > 0 || m_Grounded))
-            {
-                // Reset jump count if the player is on the ground
-                if (m_Grounded)
-                    jumps_left = m_MaxJumps;
+            // Reset jump count if the player is on the ground
+            if (jump && m_Grounded && m_Anim.GetBool("Ground"))
+            {   
                 // Add a vertical force to the player.
                 m_Grounded = false;
                 m_Anim.SetBool("Ground", false);
                 m_Rigidbody2D.AddForce(new Vector2(0f, m_JumpForce));
-                jumps_left--;
             }
         }
 
